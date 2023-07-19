@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Webleb</title>
+
+  <style>
+
+    /* Add the CSS styles here */
+
+    :root {
+
+      --scrollcolor: #fff;
+
+      --scrollbackground: #141e27;
+
+    }
+
+    * {
+
+      box-sizing: border-box;
+
+    }
+
+    html, body {
+
+      padding: 0;
+
+      margin: 0;
+
+      height: 100vh;
+
+    }
+
+    body {
+
+      background: #203239;
+
+    }
+
+    .title {
+
+      font-size: 2.5rem;
+
+      font-family: system-ui;
+
+      line-height: 1.1;
+
+      font-weight: 300;
+
+      color: #fff;
+
+      margin: 4rem auto 1rem;
+
+      width: 85%;
+
+      max-width: 1280px;
+
+    }
+
+    .slider {
+
+      width: 85%;
+
+      max-width: 1280px;
+
+      margin: 0 auto;
+
+    }
+
+    .slider__content {
+
+      overflow-x: scroll;
+
+      scroll-snap-type: x mandatory;
+
+      display: flex;
+
+      gap: 1rem;
+
+      padding-bottom: 1rem;
+
+      scrollbar-color: var(--scrollcolor) var(--scrollbackground);
+
+    }
+
+    /* Rest of the CSS styles... */
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="slider" x-data="{start: true, end: false}" style="padding-top: 150px;">
+
+    <div class="slider__content" x-ref="slider" x-on:scroll.debounce="$refs.slider.scrollLeft == 0 ? start = true : start = false; Math.abs(($refs.slider.scrollWidth - $refs.slider.offsetWidth) - $refs.slider.scrollLeft) < 5 ? end = true : end = false;">
+
+      <div class="slider__item">
+
+        <img class="slider__image" src="https://i.ibb.co/MGzyYyX/dragon-scales.png" alt="Image">
+
+        <div class="slider__info">
+
+          <h2>Card 1</h2>
+
+        </div>
+
+      </div>
+
+      <div class="slider__item">
+
+        <img class="slider__image" src="https://i.ibb.co/k3brJhb/flat-mountains.png" alt="Image">
+
+        <div class="slider__info">
+
+          <h2>Card 2</h2>
+
+        </div>
+
+      </div>
+
+      <div class="slider__item">
+
+        <img class="slider__image" src="https://i.ibb.co/vXmP0dR/pattern-japanese-pattern-2-1-2-0-0-0-1-ffffff00-000000.png" alt="Image">
+
+        <div class="slider__info">
+
+          <h2>Card 3</h2>
+
+        </div>
+
+      </div>
+
+      <!-- Add more slider items with images here... -->
+
+    </div>
+
+    <div class="slider__nav" style="display: flex;justify-content: center;">
+
+      <button class="slider__nav__button" x-on:click="$refs.slider.scrollBy({left: $refs.slider.offsetWidth * -1, behavior: 'smooth'});" x-bind:class="start ? '' : 'slider__nav__button--active'">Previous</button>
+
+      <button class="slider__nav__button" x-on:click="$refs.slider.scrollBy({left: $refs.slider.offsetWidth, behavior: 'smooth'});" x-bind:class="end ? '' : 'slider__nav__button--active'">Next</button>
+
+    </div>
+
+  </div>
+
+
+
+  <div id="contact" class="formBtn">Contact</div>
+
+  <div id="contactForm">
+
+    <h1 style="margin-bottom: 10px;">Keep in touch</h1>
+
+    <form action="#">
+
+      <input placeholder="Name" type="text" required />
+
+      <input placeholder="Email" type="email" required />
+
+      <input placeholder="Subject" type="text" required />
+
+      <textarea placeholder="Message"></textarea>
+
+      <button class="formBtn" type="submit">Submit</button>
+
+    </form>
+
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.2/cdn.js"></script>
+
+  <script>
+
+    $(function() {
+
+      $('#contact').click(function() {
+
+        $('#contactForm').fadeToggle();
+
+      });
+
+
+
+      $(document).mouseup(function (e) {
+
+        var container = $("#contactForm");
+
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+
+          container.fadeOut();
+
+        }
+
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>
